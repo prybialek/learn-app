@@ -1,10 +1,9 @@
 package com.prybialek.learnapp.dao;
 
-import com.prybialek.learnapp.entity.User;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import com.prybialek.learnapp.dao.entity.User;
 
-@Repository
-public interface UserDao extends JpaRepository<User, Integer> {
+public interface UserDao {
+
+    User findUserByNameAndSalary(String user, int salary);
 
 }
