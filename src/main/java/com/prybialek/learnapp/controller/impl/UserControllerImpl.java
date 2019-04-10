@@ -32,4 +32,5 @@ public class UserControllerImpl implements UserController {
     public User addUser(@RequestBody User user) {
         return userService.addUser(user);
     }
+
 }

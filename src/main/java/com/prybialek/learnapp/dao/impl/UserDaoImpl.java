@@ -20,5 +20,4 @@ public class UserDaoImpl implements UserDao {
                 .setParameter(User.PARAM_SALARY, salary)
                 .getSingleResult();
     }
-
 }
