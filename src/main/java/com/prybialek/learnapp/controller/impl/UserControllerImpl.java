@@ -17,8 +17,12 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserControllerImpl implements UserController {
 
+    private final UserService userService;
+
     @Autowired
-    private UserService userService;
+    public UserControllerImpl(UserService userService) {
+        this.userService = userService;
+    }
 
     @Override
     @RequestMapping(value = "/all", method = RequestMethod.GET)

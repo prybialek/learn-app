@@ -10,8 +10,12 @@ import javax.persistence.EntityManager;
 @Repository
 public class UserDaoImpl implements UserDao {
 
+    private final EntityManager em;
+
     @Autowired
-    private EntityManager em;
+    public UserDaoImpl(EntityManager em) {
+        this.em = em;
+    }
 
     @Override
     public User findUserByNameAndSalary(String user, int salary) {
