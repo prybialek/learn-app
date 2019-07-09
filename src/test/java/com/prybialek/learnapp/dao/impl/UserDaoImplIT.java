@@ -25,19 +25,20 @@ public class UserDaoImplIT implements TestConstants {
     @Test
     public void shouldFindUserByNameAndSalary() {
         // given
-        basicDao.save(new User(TEST_USER_1, TEST_SALARY_1));
+        basicDao.save(new User(TEST_USER_1, TEST_SALARY_1, TEST_ADDRESSES_DE));
 
         // when
         User foundUser = userDaoImpl.findUserByNameAndSalary(TEST_USER_1, TEST_SALARY_1);
 
         // then
-        assertFoundUser(foundUser, TEST_USER_1, TEST_SALARY_1);
+        assertFoundUser(foundUser);
     }
 
-    private void assertFoundUser(User foundUser, String user, int salary) {
+    private void assertFoundUser(User foundUser) {
         Assert.assertNotNull(foundUser);
-        Assert.assertEquals(user, foundUser.getName());
-        Assert.assertEquals(salary, foundUser.getSalary());
+        Assert.assertEquals(TEST_USER_1, foundUser.getName());
+        Assert.assertEquals(TEST_SALARY_1, foundUser.getSalary());
+        Assert.assertEquals(TEST_ADDRESSES_DE.size(), 2);
     }
 
 }

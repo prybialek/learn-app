@@ -25,9 +25,9 @@ public class UserServiceImplTest implements TestConstants {
     private UserServiceImpl userServiceImpl;
 
     @Test
-    public void shouldAddUser() {
+    public void shouldAddUserWithAddresses() {
         // given
-        User newUser = new User(TEST_USER_1, TEST_SALARY_1);
+        User newUser = new User(TEST_USER_1, TEST_SALARY_1, TEST_ADDRESSES_PL);
 
         // when
         userServiceImpl.addUser(newUser);
@@ -50,9 +50,9 @@ public class UserServiceImplTest implements TestConstants {
     }
 
     private List<User> dummyUsers() {
-        User newTestUser1 = new User(TEST_USER_1, TEST_SALARY_1);
-        User newTestUser2 = new User(TEST_USER_2, TEST_SALARY_2);
-        User newTestUser3 = new User(TEST_USER_3, TEST_SALARY_3);
+        User newTestUser1 = new User(TEST_USER_1, TEST_SALARY_1, TEST_ADDRESSES_PL);
+        User newTestUser2 = new User(TEST_USER_2, TEST_SALARY_2, TEST_ADDRESSES_EN);
+        User newTestUser3 = new User(TEST_USER_3, TEST_SALARY_3, TEST_ADDRESSES_DE);
 
         return Arrays.asList(newTestUser1, newTestUser2, newTestUser3);
     }

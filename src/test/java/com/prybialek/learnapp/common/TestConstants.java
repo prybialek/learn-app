@@ -1,5 +1,11 @@
 package com.prybialek.learnapp.common;
 
+import com.prybialek.learnapp.dao.entity.Address;
+import com.prybialek.learnapp.dao.entity.Country;
+
+import java.util.Arrays;
+import java.util.List;
+
 public interface TestConstants {
 
     String TEST_USER_1 = "TestUser1";
@@ -9,5 +15,9 @@ public interface TestConstants {
     int TEST_SALARY_1 = 10000;
     int TEST_SALARY_2 = 20000;
     int TEST_SALARY_3 = 30000;
+
+    List<Address> TEST_ADDRESSES_PL = Arrays.asList(new Address(Country.PL,"Testowa 1"), new Address(Country.PL,"Testowa 2"));
+    List<Address> TEST_ADDRESSES_EN = Arrays.asList(new Address(Country.EN,"Test Street 1"), new Address(Country.EN,"Test Street 2"));
+    List<Address> TEST_ADDRESSES_DE = Arrays.asList(new Address(Country.DE,"Test Strasse 1"), new Address(Country.DE,"Test Strasse 2"));
 
 }

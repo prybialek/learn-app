@@ -1,14 +1,20 @@
 package com.prybialek.learnapp.dao.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Table(name = "T_USER")
@@ -30,18 +36,26 @@ public class User {
     private Long id;
 
     @Column(name = "NAME")
+    @NotNull
     private String name;
 
     @Column(name = "SALARY")
+    @NotNull
     private int salary;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @JoinColumn(name = "USER_ID")
+    @NotNull
+    private List<Address> addresses;
 
     public User() {
         // default constructor
     }
 
-    public User(String name, int salary) {
+    public User(@NotNull String name, @NotNull int salary, @NotNull List<Address> addresses) {
         this.name = name;
         this.salary = salary;
+        this.addresses = addresses;
     }
 
     public Long getId() {
@@ -62,5 +76,13 @@ public class User {
 
     public void setSalary(int salary) {
         this.salary = salary;
+    }
+
+    public List<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
     }
 }
