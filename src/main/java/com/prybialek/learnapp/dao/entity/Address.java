@@ -7,9 +7,12 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 @Entity
 @Table(name = "T_ADDRESS")
@@ -27,6 +30,10 @@ public class Address {
     @Column(name = "STREET")
     @NotNull
     private String street;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Address() {
         //default constructor
@@ -55,5 +62,29 @@ public class Address {
 
     public void setStreet(String street) {
         this.street = street;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Address address = (Address) o;
+        return id.equals(address.id) &&
+                country == address.country &&
+                street.equals(address.street) &&
+                Objects.equals(user, address.user);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, country, street, user);
     }
 }

@@ -1,30 +1,35 @@
 package com.prybialek.learnapp.service.impl;
 
 import com.prybialek.learnapp.common.BasicDao;
-import com.prybialek.learnapp.dao.entity.User;
+import com.prybialek.learnapp.controller.dto.UserDTO;
 import com.prybialek.learnapp.service.UserService;
+import com.prybialek.learnapp.service.converter.UserConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
     private final BasicDao basicDao;
+    private final UserConverter userConverter;
 
     @Autowired
-    public UserServiceImpl(BasicDao basicDao) {
+    public UserServiceImpl(BasicDao basicDao, UserConverter userConverter) {
         this.basicDao = basicDao;
+        this.userConverter = userConverter;
     }
 
     @Override
-    public List<User> getAllUsers() {
-        return basicDao.findAll();
+    public List<UserDTO> getAllUsers() {
+        return userConverter.convertToUserDTOs(basicDao.findAll());
     }
 
     @Override
-    public User addUser(User user) {
-        return basicDao.save(user);
+    public void addUser(UserDTO userDTO) {
+        basicDao.save(userConverter.convertToUser(userDTO));
     }
 }

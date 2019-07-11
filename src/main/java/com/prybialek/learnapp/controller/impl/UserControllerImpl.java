@@ -1,7 +1,7 @@
 package com.prybialek.learnapp.controller.impl;
 
 import com.prybialek.learnapp.controller.UserController;
-import com.prybialek.learnapp.dao.entity.User;
+import com.prybialek.learnapp.controller.dto.UserDTO;
 import com.prybialek.learnapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -26,15 +26,15 @@ public class UserControllerImpl implements UserController {
 
     @Override
     @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public List<User> getAllUsers() {
+    public List<UserDTO> getAllUsers() {
         return userService.getAllUsers();
     }
 
     @Override
     @RequestMapping(value = "/add", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody()
-    public User addUser(@RequestBody User user) {
-        return userService.addUser(user);
+    public void addUser(@RequestBody UserDTO userDTO) {
+        userService.addUser(userDTO);
     }
 
 }

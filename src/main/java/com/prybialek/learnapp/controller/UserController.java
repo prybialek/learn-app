@@ -1,12 +1,12 @@
 package com.prybialek.learnapp.controller;
 
-import com.prybialek.learnapp.dao.entity.User;
+import com.prybialek.learnapp.controller.dto.UserDTO;
 
 import java.util.List;
 
 public interface UserController {
 
-    User addUser(User user);
-    List<User> getAllUsers();
+    void addUser(UserDTO user);
+    List<UserDTO> getAllUsers();
 
 }
