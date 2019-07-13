@@ -1,10 +1,10 @@
 package com.prybialek.learnapp.service.impl;
 
 
-import com.prybialek.learnapp.common.BasicDao;
 import com.prybialek.learnapp.common.TestConstants;
 import com.prybialek.learnapp.controller.dto.UserDTO;
-import com.prybialek.learnapp.dao.entity.User;
+import com.prybialek.learnapp.dao.repo.UserRepo;
+import com.prybialek.learnapp.model.entity.User;
 import com.prybialek.learnapp.service.converter.UserConverter;
 import org.assertj.core.groups.Tuple;
 import org.junit.Assert;
@@ -24,7 +24,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class UserServiceImplTest implements TestConstants {
 
     @Mock
-    private BasicDao basicDao;
+    private UserRepo userRepo;
 
     @Mock
     private UserConverter userConverter;
@@ -43,14 +43,14 @@ public class UserServiceImplTest implements TestConstants {
         userServiceImpl.addUser(userDTO);
 
         // then
-        Mockito.verify(basicDao, Mockito.times(1)).save(user);
+        Mockito.verify(userRepo, Mockito.times(1)).save(user);
     }
 
     @Test
     public void shouldFindAllUsers() {
         // given
         List<User> users = dummyUsers();
-        Mockito.when(basicDao.findAll()).thenReturn(users);
+        Mockito.when(userRepo.findAll()).thenReturn(users);
         Mockito.when(userConverter.convertToUserDTOs(users)).thenReturn(dummyUsersDTO());
 
         // when

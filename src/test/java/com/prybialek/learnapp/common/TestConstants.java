@@ -1,8 +1,8 @@
 package com.prybialek.learnapp.common;
 
 import com.prybialek.learnapp.controller.dto.AddressDTO;
-import com.prybialek.learnapp.dao.entity.Address;
-import com.prybialek.learnapp.dao.entity.Country;
+import com.prybialek.learnapp.model.entity.Address;
+import com.prybialek.learnapp.model.entity.Country;
 
 import java.util.Arrays;
 import java.util.List;

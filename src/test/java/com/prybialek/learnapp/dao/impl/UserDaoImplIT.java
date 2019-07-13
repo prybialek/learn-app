@@ -1,8 +1,8 @@
 package com.prybialek.learnapp.dao.impl;
 
-import com.prybialek.learnapp.common.BasicDao;
 import com.prybialek.learnapp.common.TestConstants;
-import com.prybialek.learnapp.dao.entity.User;
+import com.prybialek.learnapp.dao.repo.UserRepo;
+import com.prybialek.learnapp.model.entity.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,16 +18,16 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 public class UserDaoImplIT implements TestConstants {
 
     @Autowired
-    private UserDaoImpl userDaoImpl;
+    private UserRepoCustomImpl userDaoImpl;
 
     @Autowired
-    private BasicDao basicDao;
+    private UserRepo userRepo;
 
     @Test
     public void shouldFindUserByNameAndSalary() {
         // given
         User userToSave = new User(TEST_USER_1, TEST_SALARY_1, TEST_ADDRESSES_DE);
-        basicDao.save(userToSave);
+        userRepo.save(userToSave);
 
         // when
         User foundUser = userDaoImpl.findUserByNameAndSalary(TEST_USER_1, TEST_SALARY_1);

@@ -1,4 +1,4 @@
-package com.prybialek.learnapp.dao.entity;
+package com.prybialek.learnapp.model.entity;
 
 public enum Country {
     PL,

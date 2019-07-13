@@ -2,8 +2,8 @@ package com.prybialek.learnapp.service.converter;
 
 import com.prybialek.learnapp.controller.dto.AddressDTO;
 import com.prybialek.learnapp.controller.dto.UserDTO;
-import com.prybialek.learnapp.dao.entity.Address;
-import com.prybialek.learnapp.dao.entity.User;
+import com.prybialek.learnapp.model.entity.Address;
+import com.prybialek.learnapp.model.entity.User;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.prybialek.learnapp.controller.dto;
 
-import com.prybialek.learnapp.dao.entity.Country;
+import com.prybialek.learnapp.model.entity.Country;
 
 public class AddressDTO {
 

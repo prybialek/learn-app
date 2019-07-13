@@ -1,4 +1,4 @@
-package com.prybialek.learnapp.dao.entity;
+package com.prybialek.learnapp.model.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
