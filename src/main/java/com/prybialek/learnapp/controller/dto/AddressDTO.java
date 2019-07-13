@@ -8,6 +8,15 @@ public class AddressDTO {
     private Country country;
     private String street;
 
+    public AddressDTO() {
+        // default constructor
+    }
+
+    public AddressDTO(Country country, String street) {
+        this.country = country;
+        this.street = street;
+    }
+
     public Long getId() {
         return id;
     }
@@ -31,4 +40,5 @@ public class AddressDTO {
     public void setStreet(String street) {
         this.street = street;
     }
+
 }

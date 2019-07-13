@@ -7,6 +7,7 @@ import com.prybialek.learnapp.dao.entity.User;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Component
@@ -20,7 +21,9 @@ public class UserConverter {
         User user = new User();
         user.setName(userDTO.getName());
         user.setSalary(userDTO.getSalary());
-        userDTO.getAddresses().forEach(a -> user.addAddress(convertToAddress(a)));
+        if (Objects.nonNull(userDTO.getAddresses())) {
+            userDTO.getAddresses().forEach(a -> user.addAddress(convertToAddress(a)));
+        }
 
         return user;
     }
@@ -30,7 +33,9 @@ public class UserConverter {
         userDTO.setId(user.getId());
         userDTO.setName(user.getName());
         userDTO.setSalary(user.getSalary());
-        userDTO.setAddresses(user.getAddresses().stream().map(this::convertToAddressDTO).collect(Collectors.toList()));
+        if(Objects.nonNull(user.getAddresses())) {
+            userDTO.setAddresses(user.getAddresses().stream().map(this::convertToAddressDTO).collect(Collectors.toList()));
+        }
 
         return userDTO;
     }
@@ -51,6 +56,5 @@ public class UserConverter {
 
         return addressDTO;
     }
-
 
 }

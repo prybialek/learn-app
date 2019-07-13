@@ -1,5 +1,6 @@
 package com.prybialek.learnapp.controller.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserDTO {
@@ -7,7 +8,17 @@ public class UserDTO {
     private Long id;
     private String name;
     private int salary;
-    private List<AddressDTO> addresses;
+    private List<AddressDTO> addresses = new ArrayList<>();
+
+    public UserDTO() {
+        // default constructor
+    }
+
+    public UserDTO(String name, int salary, List<AddressDTO> addresses) {
+        this.name = name;
+        this.salary = salary;
+        this.addresses = addresses;
+    }
 
     public Long getId() {
         return id;
@@ -40,4 +51,5 @@ public class UserDTO {
     public void setAddresses(List<AddressDTO> addresses) {
         this.addresses = addresses;
     }
+
 }

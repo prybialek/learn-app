@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-@Transactional
 public class UserServiceImpl implements UserService {
 
     private final BasicDao basicDao;
@@ -24,6 +23,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public List<UserDTO> getAllUsers() {
         return userConverter.convertToUserDTOs(basicDao.findAll());
     }
@@ -32,4 +32,5 @@ public class UserServiceImpl implements UserService {
     public void addUser(UserDTO userDTO) {
         basicDao.save(userConverter.convertToUser(userDTO));
     }
+
 }

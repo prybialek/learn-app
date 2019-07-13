@@ -1,8 +1,9 @@
 package com.prybialek.learnapp.controller.impl;
 
 import com.prybialek.learnapp.common.TestConstants;
-import com.prybialek.learnapp.dao.entity.User;
+import com.prybialek.learnapp.controller.dto.UserDTO;
 import com.prybialek.learnapp.service.UserService;
+import org.assertj.core.groups.Tuple;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,25 +27,24 @@ public class UserControllerImplTest implements TestConstants {
     private UserControllerImpl userControllerImpl;
 
     @Test
-    public void shouldAddUserWithAddresses() {
+    public void shouldCorrectlyAddUserWithAddresses() {
         // given
-        User newTestUser = new User(TEST_USER_1, TEST_SALARY_1, TEST_ADDRESSES_PL);
-        Mockito.when(userService.addUser(newTestUser)).thenReturn(newTestUser);
+        UserDTO userDTO = new UserDTO(TEST_USER_1, TEST_SALARY_1, TEST_ADDRESSES_DTO_PL);
 
         // when
-        User addedUser = userControllerImpl.addUser(newTestUser);
+        userControllerImpl.addUser(userDTO);
 
         // then
-        Mockito.verify(userService, Mockito.times(1)).addUser(addedUser);
+        Mockito.verify(userService, Mockito.times(1)).addUser(userDTO);
     }
 
     @Test
     public void shouldFindAllUsers() {
         // given
-        Mockito.when(userService.getAllUsers()).thenReturn(dummyUsers());
+        Mockito.when(userService.getAllUsers()).thenReturn(dummyUsersDTO());
 
         // when
-        List<User> allUsers = userControllerImpl.getAllUsers();
+        List<UserDTO> allUsers = userControllerImpl.getAllUsers();
 
         // then
         Mockito.verify(userService, Mockito.times(1)).getAllUsers();
@@ -54,23 +54,26 @@ public class UserControllerImplTest implements TestConstants {
     @Test
     public void shouldFindAllUsersWithAddresses() {
         // given
-        Mockito.when(userService.getAllUsers()).thenReturn(dummyUsers());
+        Mockito.when(userService.getAllUsers()).thenReturn(dummyUsersDTO());
 
         // when
-        List<User> allUsers = userControllerImpl.getAllUsers();
+        List<UserDTO> users = userControllerImpl.getAllUsers();
 
         // then
         Mockito.verify(userService, Mockito.times(1)).getAllUsers();
-        assertThat(allUsers).extracting("name").containsExactly(TEST_USER_2, TEST_USER_3);
-        assertThat(allUsers).extracting("salary").containsExactly(TEST_SALARY_2, TEST_SALARY_3);
-        assertThat(allUsers).extracting("addresses").containsExactly(TEST_ADDRESSES_PL, TEST_ADDRESSES_EN);
+        assertThat(users).extracting("name", "salary", "addresses").containsExactly(expectedResult());
+
     }
 
-    private List<User> dummyUsers() {
-        User newTestUser1 = new User(TEST_USER_2, TEST_SALARY_2, TEST_ADDRESSES_PL);
-        User newTestUser2 = new User(TEST_USER_3, TEST_SALARY_3, TEST_ADDRESSES_EN);
+    private List<UserDTO> dummyUsersDTO() {
+        UserDTO newTestUserDTO1 = new UserDTO(TEST_USER_2, TEST_SALARY_2, TEST_ADDRESSES_DTO_PL);
+        UserDTO newTestUserDTO2 = new UserDTO(TEST_USER_3, TEST_SALARY_3, TEST_ADDRESSES_DTO_EN);
 
-        return Arrays.asList(newTestUser1, newTestUser2);
+        return Arrays.asList(newTestUserDTO1, newTestUserDTO2);
+    }
+
+    private Tuple[] expectedResult() {
+        return new Tuple[]{Tuple.tuple(TEST_USER_2, TEST_SALARY_2, TEST_ADDRESSES_DTO_PL), Tuple.tuple(TEST_USER_3, TEST_SALARY_3, TEST_ADDRESSES_DTO_EN)};
     }
 
 }

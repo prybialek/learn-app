@@ -1,5 +1,6 @@
 package com.prybialek.learnapp.common;
 
+import com.prybialek.learnapp.controller.dto.AddressDTO;
 import com.prybialek.learnapp.dao.entity.Address;
 import com.prybialek.learnapp.dao.entity.Country;
 
@@ -19,5 +20,9 @@ public interface TestConstants {
     List<Address> TEST_ADDRESSES_PL = Arrays.asList(new Address(Country.PL,"Testowa 1"), new Address(Country.PL,"Testowa 2"));
     List<Address> TEST_ADDRESSES_EN = Arrays.asList(new Address(Country.EN,"Test Street 1"), new Address(Country.EN,"Test Street 2"));
     List<Address> TEST_ADDRESSES_DE = Arrays.asList(new Address(Country.DE,"Test Strasse 1"), new Address(Country.DE,"Test Strasse 2"));
+
+    List<AddressDTO> TEST_ADDRESSES_DTO_PL = Arrays.asList(new AddressDTO(Country.PL,"Testowa 1"), new AddressDTO(Country.PL,"Testowa 2"));
+    List<AddressDTO> TEST_ADDRESSES_DTO_EN = Arrays.asList(new AddressDTO(Country.EN,"Test Street 1"), new AddressDTO(Country.EN,"Test Street 2"));
+    List<AddressDTO> TEST_ADDRESSES_DTO_DE = Arrays.asList(new AddressDTO(Country.DE,"Test Strasse 1"), new AddressDTO(Country.DE,"Test Strasse 2"));
 
 }
