@@ -3,13 +3,11 @@ package com.prybialek.learnapp.model.entity;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
@@ -21,19 +19,19 @@ import java.util.Objects;
 @NamedQueries({
         @NamedQuery(
                 name = User.NQ_FIND_USER_BY_NAME_AND_SALARY,
-                query = "select u from User u where u.name = :" + User.PARAM_USER + " and u.salary = :" + User.PARAM_SALARY
+                query = "select u from User u where u.name = :" + User.PARAM_NAME + " and u.salary = :" + User.PARAM_SALARY
         )
 })
 public class User {
 
     public static final String NQ_FIND_USER_BY_NAME_AND_SALARY = "findUserByNameAndSalary";
-    public static final String PARAM_USER = "user";
+    public static final String PARAM_NAME = "name";
     public static final String PARAM_SALARY = "salary";
 
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_SEQ")
+//    @SequenceGenerator(sequenceName = "T_USER_SEQ", allocationSize = 1, name = "USER_SEQ")
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_SEQ")
-    @SequenceGenerator(sequenceName = "T_USER_SEQ", allocationSize = 1, name = "USER_SEQ")
-    private Long id;
+    private Long pesel;
 
     @Column(name = "NAME")
     @NotNull
@@ -43,21 +41,26 @@ public class User {
     @NotNull
     private int salary;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "addressId.userId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Address> addresses = new ArrayList<>();
 
     public User() {
         // default constructor
     }
 
-    public User(@NotNull String name, @NotNull int salary, List<Address> addresses) {
+    public User(@NotNull Long pesel, @NotNull String name, @NotNull int salary, List<Address> addresses) {
+        this.pesel = pesel;
         this.name = name;
         this.salary = salary;
         this.addresses = addresses;
     }
 
-    public Long getId() {
-        return id;
+    public void setPesel(Long pesel) {
+        this.pesel = pesel;
+    }
+
+    public Long getPesel() {
+        return pesel;
     }
 
     public String getName() {
@@ -85,16 +88,16 @@ public class User {
     }
 
     public void addAddress(Address address) {
-        if(Objects.nonNull(address)) {
+        if (Objects.nonNull(address)) {
             addresses.add(address);
-            address.setUser(this);
+            address.getAddressId().setUserId(this.pesel);
         }
     }
 
     public void removeAddress(Address address) {
         if (address != null) {
             addresses.remove(address);
-            address.setUser(null);
+            address.getAddressId().setUserId(null);
         }
     }
 

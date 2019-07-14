@@ -26,7 +26,7 @@ public class UserDaoImplIT implements TestConstants {
     @Test
     public void shouldFindUserByNameAndSalary() {
         // given
-        User userToSave = new User(TEST_USER_1, TEST_SALARY_1, TEST_ADDRESSES_DE);
+        User userToSave = new User(TEST_ID_3, TEST_USER_1, TEST_SALARY_1, TEST_ADDRESSES_DE);
         userRepo.save(userToSave);
 
         // when

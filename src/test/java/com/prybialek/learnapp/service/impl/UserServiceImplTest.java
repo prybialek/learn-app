@@ -36,7 +36,7 @@ public class UserServiceImplTest implements TestConstants {
     public void shouldAddUserWithAddresses() {
         // given
         UserDTO userDTO = new UserDTO(TEST_USER_1, TEST_SALARY_1, TEST_ADDRESSES_DTO_PL);
-        User user = new User(TEST_USER_1, TEST_SALARY_1, TEST_ADDRESSES_PL);
+        User user = new User(TEST_ID_1, TEST_USER_1, TEST_SALARY_1, TEST_ADDRESSES_PL);
         Mockito.when(userConverter.convertToUser(userDTO)).thenReturn(user);
 
         // when
@@ -62,9 +62,9 @@ public class UserServiceImplTest implements TestConstants {
     }
 
     private List<User> dummyUsers() {
-        User newTestUser1 = new User(TEST_USER_1, TEST_SALARY_1, TEST_ADDRESSES_PL);
-        User newTestUser2 = new User(TEST_USER_2, TEST_SALARY_2, TEST_ADDRESSES_EN);
-        User newTestUser3 = new User(TEST_USER_3, TEST_SALARY_3, TEST_ADDRESSES_DE);
+        User newTestUser1 = new User(TEST_ID_1, TEST_USER_1, TEST_SALARY_1, TEST_ADDRESSES_PL);
+        User newTestUser2 = new User(TEST_ID_2, TEST_USER_2, TEST_SALARY_2, TEST_ADDRESSES_EN);
+        User newTestUser3 = new User(TEST_ID_3, TEST_USER_3, TEST_SALARY_3, TEST_ADDRESSES_DE);
 
         return Arrays.asList(newTestUser1, newTestUser2, newTestUser3);
     }

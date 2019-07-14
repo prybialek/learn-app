@@ -3,6 +3,7 @@ package com.prybialek.learnapp.service.converter;
 import com.prybialek.learnapp.controller.dto.AddressDTO;
 import com.prybialek.learnapp.controller.dto.UserDTO;
 import com.prybialek.learnapp.model.entity.Address;
+import com.prybialek.learnapp.model.entity.AddressId;
 import com.prybialek.learnapp.model.entity.User;
 import org.springframework.stereotype.Component;
 
@@ -19,10 +20,11 @@ public class UserConverter {
 
     public User convertToUser(UserDTO userDTO) {
         User user = new User();
+        user.setPesel(userDTO.getPesel());
         user.setName(userDTO.getName());
         user.setSalary(userDTO.getSalary());
         if (Objects.nonNull(userDTO.getAddresses())) {
-            userDTO.getAddresses().forEach(a -> user.addAddress(convertToAddress(a)));
+            userDTO.getAddresses().forEach(a -> user.addAddress(convertToAddress(a, userDTO.getPesel())));
         }
 
         return user;
@@ -30,7 +32,7 @@ public class UserConverter {
 
     private UserDTO convertToUserDTO(User user) {
         UserDTO userDTO = new UserDTO();
-        userDTO.setId(user.getId());
+        userDTO.setPesel(user.getPesel());
         userDTO.setName(user.getName());
         userDTO.setSalary(user.getSalary());
         if(Objects.nonNull(user.getAddresses())) {
@@ -40,19 +42,14 @@ public class UserConverter {
         return userDTO;
     }
 
-    private Address convertToAddress(AddressDTO addressDTO) {
-        Address address = new Address();
-        address.setCountry(addressDTO.getCountry());
-        address.setStreet(addressDTO.getStreet());
-
-        return address;
+    private Address convertToAddress(AddressDTO addressDTO, Long pesel) {
+        return new Address(new AddressId(addressDTO.getCountry(), addressDTO.getStreet(), pesel));
     }
 
     private AddressDTO convertToAddressDTO(Address address) {
         AddressDTO addressDTO = new AddressDTO();
-        addressDTO.setId(address.getId());
-        addressDTO.setCountry(address.getCountry());
-        addressDTO.setStreet(address.getStreet());
+        addressDTO.setCountry(address.getAddressId().getCountry());
+        addressDTO.setStreet(address.getAddressId().getStreet());
 
         return addressDTO;
     }

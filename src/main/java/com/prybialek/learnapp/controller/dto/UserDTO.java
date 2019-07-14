@@ -5,7 +5,7 @@ import java.util.List;
 
 public class UserDTO {
 
-    private Long id;
+    private Long pesel;
     private String name;
     private int salary;
     private List<AddressDTO> addresses = new ArrayList<>();
@@ -20,12 +20,12 @@ public class UserDTO {
         this.addresses = addresses;
     }
 
-    public Long getId() {
-        return id;
+    public Long getPesel() {
+        return pesel;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setPesel(Long pesel) {
+        this.pesel = pesel;
     }
 
     public String getName() {

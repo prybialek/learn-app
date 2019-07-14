@@ -22,8 +22,9 @@ public class UserRepoCustomImpl implements UserRepoCustom {
     @Transactional(readOnly = true)
     public User findUserByNameAndSalary(String user, int salary) {
         return em.createNamedQuery(User.NQ_FIND_USER_BY_NAME_AND_SALARY, User.class)
-                .setParameter(User.PARAM_USER, user)
+                .setParameter(User.PARAM_NAME, user)
                 .setParameter(User.PARAM_SALARY, salary)
                 .getSingleResult();
     }
+
 }
